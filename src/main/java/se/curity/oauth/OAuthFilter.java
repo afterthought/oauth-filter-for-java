@@ -35,6 +35,7 @@ import java.util.logging.Logger;
 
 public abstract class OAuthFilter implements Filter
 {
+    public static final String TOKEN_DATA_PARAM = "_tokenData";
     private static final String[] NO_SCOPES = {};
     private static final Logger _logger = Logger.getLogger(OAuthFilter.class.getName());
     private static final String WWW_AUTHENTICATE = "WWW-Authenticate";
@@ -105,6 +106,8 @@ public abstract class OAuthFilter implements Filter
             return;
         }
 
+
+        servletRequest.setAttribute(TOKEN_DATA_PARAM, authenticatedUser.getTokenData());
         if (filterChain != null)
         {
             filterChain.doFilter(

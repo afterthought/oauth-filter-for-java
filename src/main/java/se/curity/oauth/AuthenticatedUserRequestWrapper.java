@@ -44,11 +44,10 @@ class AuthenticatedUserRequestWrapper extends HttpServletRequestWrapper
 
         _request = request;
         _authenticatedUser = authenticatedUser;
+
     }
 
-    public AuthenticatedUser getAuthenticatedUser() {
-        return _authenticatedUser;
-    }
+ 
 
     @Override
     public String getRemoteUser()
