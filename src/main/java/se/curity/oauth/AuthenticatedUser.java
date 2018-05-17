@@ -23,11 +23,13 @@ public class AuthenticatedUser
 {
     private final String _sub;
     private final Set<String> _scopes;
+    private final TokenData _tokenData;
 
-    private AuthenticatedUser(String subject, Set<String> scopes)
+    private AuthenticatedUser(String subject, Set<String> scopes, TokenData tokenData)
     {
         _sub = subject;
         _scopes = scopes;
+        _tokenData = tokenData;
     }
 
     public String getSubject()
@@ -40,6 +42,10 @@ public class AuthenticatedUser
         return _scopes;
     }
 
+    public TokenData getTokenData() {
+        return _tokenData;
+    }
+
     static AuthenticatedUser from(TokenData tokenData)
     {
         Objects.requireNonNull(tokenData);
@@ -48,6 +54,6 @@ public class AuthenticatedUser
 
         Objects.requireNonNull(subject);
 
-        return new AuthenticatedUser(subject, tokenData.getScopes());
+        return new AuthenticatedUser(subject, tokenData.getScopes(), tokenData);
     }
 }
