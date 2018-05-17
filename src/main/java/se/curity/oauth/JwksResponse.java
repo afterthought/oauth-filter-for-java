@@ -22,7 +22,6 @@ import javax.json.JsonValue;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 class JwksResponse
 {
@@ -38,7 +37,8 @@ class JwksResponse
         }
         else
         {
-            _keys = Stream.of((JsonArray)keys)
+
+            _keys = ((JsonArray) keys).stream()
                     .filter(it -> it.getValueType() == JsonValue.ValueType.OBJECT)
                     .map(it -> (JsonObject) it)
                     .map(JsonWebKey::new)
