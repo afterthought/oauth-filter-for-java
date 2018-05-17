@@ -39,7 +39,7 @@ public class JwtData implements TokenData, Expirable
         _scopes = new HashSet<>(Arrays.asList(presentedScopes));
     }
 
-    JsonObject getJsonObject()
+    public JsonObject getJsonObject()
     {
         return _jsonObject;
     }
