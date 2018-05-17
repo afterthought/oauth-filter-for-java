@@ -16,6 +16,7 @@
 
 package se.curity.oauth;
 
+import javax.json.JsonString;
 import javax.json.JsonValue;
 import java.util.logging.Logger;
 
@@ -30,7 +31,7 @@ enum JsonWebKeyType
 
     static JsonWebKeyType from(JsonValue value)
     {
-        if (value == null || value.toString().length() == 0)
+        if (value == null || (value instanceof JsonString && ((JsonString)value).getString().length() == 0))
         {
             return UNSPECIFIED;
         }
@@ -41,7 +42,12 @@ enum JsonWebKeyType
                     value, value.getValueType()));
         }
 
-        switch (value.toString())
+
+        String stringValue = value.toString();
+        if (value instanceof JsonString) {
+            stringValue = ((JsonString)value).getString();
+        }
+        switch (stringValue)
         {
             case "RSA":
                 return RSA;
